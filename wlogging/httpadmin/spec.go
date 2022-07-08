@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"wswlog/wlogging"
+	"github.com/wsw365904/wswlog/wlogging"
 )
 
 //go:generate counterfeiter -o fakes/logging.go -fake-name Logging . Logging

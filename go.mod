@@ -1,4 +1,4 @@
-module wswlog
+module github.com/wsw365904/wswlog
 
 go 1.16
 
