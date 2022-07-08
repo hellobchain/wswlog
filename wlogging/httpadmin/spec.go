@@ -32,13 +32,13 @@ type ErrorResponse struct {
 func NewSpecHandler() *SpecHandler {
 	return &SpecHandler{
 		Logging: wlogging.Global,
-		Logger:  wlogging.MustGetLogger("flogging.httpadmin"),
+		Logger:  wlogging.MustGetLogger("wlogging.httpadmin"),
 	}
 }
 
 type SpecHandler struct {
 	Logging Logging
-	Logger  *wlogging.FabricLogger
+	Logger  *wlogging.WswLogger
 }
 
 func (h *SpecHandler) ServeHTTP(resp http.ResponseWriter, req *http.Request) {

@@ -12,7 +12,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/wsw365904/wswlog/wlogging/fabenc"
+	"github.com/wsw365904/wswlog/wlogging/wenc"
 
 	logging "github.com/op/go-logging"
 	zaplogfmt "github.com/sykesm/zap-logfmt"
@@ -52,7 +52,7 @@ type Logging struct {
 	mutex          sync.RWMutex
 	encoding       Encoding
 	encoderConfig  zapcore.EncoderConfig
-	multiFormatter *fabenc.MultiFormatter
+	multiFormatter *wenc.MultiFormatter
 	writer         zapcore.WriteSyncer
 	observer       Observer
 }
@@ -68,7 +68,7 @@ func New(c Config) (*Logging, error) {
 			defaultLevel: defaultLevel,
 		},
 		encoderConfig:  encoderConfig,
-		multiFormatter: fabenc.NewMultiFormatter(),
+		multiFormatter: wenc.NewMultiFormatter(),
 	}
 
 	err := s.Apply(c)
@@ -136,7 +136,7 @@ func (s *Logging) SetFormat(format string) error {
 		return nil
 	}
 
-	formatters, err := fabenc.ParseFormat(format)
+	formatters, err := wenc.ParseFormat(format)
 	if err != nil {
 		return err
 	}
@@ -216,7 +216,7 @@ func (s *Logging) ZapLogger(name string) *zap.Logger {
 		Levels:       s.LoggerLevels,
 		Encoders: map[Encoding]zapcore.Encoder{
 			JSON:    zapcore.NewJSONEncoder(s.encoderConfig),
-			CONSOLE: fabenc.NewFormatEncoder(s.multiFormatter),
+			CONSOLE: wenc.NewFormatEncoder(s.multiFormatter),
 			LOGFMT:  zaplogfmt.NewEncoder(s.encoderConfig),
 		},
 		Selector: s,
@@ -248,9 +248,9 @@ func (s *Logging) WriteEntry(e zapcore.Entry, fields []zapcore.Field) {
 	}
 }
 
-// Logger instantiates a new FabricLogger with the specified name. The name is
+// Logger instantiates a new WswLogger with the specified name. The name is
 // used to determine which log levels are enabled.
-func (s *Logging) Logger(name string) *FabricLogger {
+func (s *Logging) Logger(name string) *WswLogger {
 	zl := s.ZapLogger(name)
-	return NewFabricLogger(zl)
+	return NewWswLogger(zl)
 }

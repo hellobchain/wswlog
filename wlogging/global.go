@@ -21,7 +21,7 @@ const (
 )
 
 var Global *Logging
-var logger *FabricLogger
+var logger *WswLogger
 
 func init() {
 	logging, err := New(Config{})
@@ -58,12 +58,12 @@ func GetLoggerLevel(loggerName string) string {
 
 // MustGetLogger creates a logger with the specified name. If an invalid name
 // is provided, the operation will panic.
-func MustGetLogger(loggerName string) *FabricLogger {
+func MustGetLogger(loggerName string) *WswLogger {
 	return Global.Logger(loggerName)
 }
 
-//自动获取包名
-func MustGetLoggerWithoutName() *FabricLogger {
+// 自动获取包名
+func MustGetLoggerWithoutName() *WswLogger {
 	pc, _, _, _ := runtime.Caller(1)
 	funcObj := runtime.FuncForPC(pc)
 	r := regexp.MustCompile(`^.*/(.*)*\..*$`)
