@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package wlogging
 
 import (
+	"io"
 	"regexp"
 	"runtime"
 	"strings"
@@ -50,9 +51,9 @@ func Reset() {
 	_ = Global.Apply(Config{})
 }
 
-// GetLoggerLevel gets the current logging level for the logger with the
+// LoggerLevel gets the current logging level for the logger with the
 // provided name.
-func GetLoggerLevel(loggerName string) string {
+func LoggerLevel(loggerName string) string {
 	return strings.ToUpper(Global.Level(loggerName).String())
 }
 
@@ -86,4 +87,16 @@ func SetGlobalLogLevel(level string) {
 		_ = Global.ActivateSpec("info")
 	}
 
+}
+
+// SetWriter calls SetWriter returning the previous value
+// of the writer.
+func SetWriter(w io.Writer) io.Writer {
+	return Global.SetWriter(w)
+}
+
+// SetObserver calls SetObserver returning the previous value
+// of the observer.
+func SetObserver(observer Observer) Observer {
+	return Global.SetObserver(observer)
 }
