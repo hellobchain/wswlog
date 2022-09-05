@@ -3,6 +3,7 @@ module github.com/wsw365904/wswlog
 go 1.16
 
 require (
+	github.com/onsi/gomega v1.20.2
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/pkg/errors v0.9.1
 	github.com/sykesm/zap-logfmt v0.0.4
