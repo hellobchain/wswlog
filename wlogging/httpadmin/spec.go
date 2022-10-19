@@ -9,9 +9,9 @@ package httpadmin
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/wsw365904/newcryptosm/http"
+	"github.com/hellobchain/newcryptosm/http"
 
-	"github.com/wsw365904/wswlog/wlogging"
+	"github.com/hellobchain/wswlog/wlogging"
 )
 
 //go:generate counterfeiter -o fakes/logging.go -fake-name Logging . Logging

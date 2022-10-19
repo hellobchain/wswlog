@@ -12,7 +12,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/wsw365904/wswlog/wlogging/wenc"
+	"github.com/hellobchain/wswlog/wlogging/wenc"
 
 	logging "github.com/op/go-logging"
 	zaplogfmt "github.com/sykesm/zap-logfmt"

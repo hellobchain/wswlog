@@ -4,7 +4,7 @@ package fakes
 import (
 	sync "sync"
 
-	httpadmin "github.com/wsw365904/wswlog/wlogging/httpadmin"
+	httpadmin "github.com/hellobchain/wswlog/wlogging/httpadmin"
 )
 
 type Logging struct {

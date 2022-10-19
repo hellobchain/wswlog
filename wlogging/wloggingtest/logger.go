@@ -13,9 +13,9 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/hellobchain/wswlog/wlogging"
+	"github.com/hellobchain/wswlog/wlogging/wenc"
 	"github.com/onsi/gomega/gbytes"
-	"github.com/wsw365904/wswlog/wlogging"
-	"github.com/wsw365904/wswlog/wlogging/wenc"
 	"go.uber.org/zap"
 	"go.uber.org/zap/buffer"
 	"go.uber.org/zap/zapcore"
