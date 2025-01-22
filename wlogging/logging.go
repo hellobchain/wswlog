@@ -86,7 +86,7 @@ func (s *Logging) Apply(c Config) error {
 	}
 
 	if c.LogSpec == "" {
-		c.LogSpec = os.Getenv("FABRIC_LOGGING_SPEC")
+		c.LogSpec = os.Getenv("WSW_LOGGING_SPEC")
 	}
 	if c.LogSpec == "" {
 		c.LogSpec = defaultLevel.String()
