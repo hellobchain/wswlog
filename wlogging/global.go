@@ -155,3 +155,7 @@ func SetWriter(w io.Writer) io.Writer {
 func SetObserver(observer Observer) Observer {
 	return Global.SetObserver(observer)
 }
+
+func SetConsole(console bool) bool {
+	return Global.SetConsole(console)
+}
