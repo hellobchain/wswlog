@@ -81,7 +81,6 @@ func getHook(filename string, maxAge, rotationTime int, rotationSize int64) (io.
 		rotatelogs.WithRotationTime(time.Hour*time.Duration(rotationTime)),
 		rotatelogs.WithLinkName(filename),
 		rotatelogs.WithMaxAge(time.Hour*24*time.Duration(maxAge)),
-		rotatelogs.WithRotationSize(rotationSize),
 	)
 
 	if err != nil {
