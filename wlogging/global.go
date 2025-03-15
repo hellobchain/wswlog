@@ -81,6 +81,7 @@ func getHook(filename string, maxAge, rotationTime int, rotationSize int64) (io.
 		rotatelogs.WithRotationTime(time.Hour*time.Duration(rotationTime)),
 		rotatelogs.WithLinkName(filename),
 		rotatelogs.WithMaxAge(time.Hour*24*time.Duration(maxAge)),
+		rotatelogs.WithRotationSize(rotationSize),
 	)
 
 	if err != nil {
@@ -102,6 +103,7 @@ type LogConfig struct {
 	MaxAge       int    // maxAge: the maximum number of days to retain old log files
 	RotationTime int    // RotationTime: rotation time
 	RotationSize int64  // RotationSize: rotation size Mb
+	Console      bool   // console: whether to print to the console
 }
 
 func MustGetFileLoggerWithoutName(logConfig *LogConfig) *WswLogger {
@@ -122,6 +124,7 @@ func MustGetFileLoggerWithoutName(logConfig *LogConfig) *WswLogger {
 		panic(err)
 	}
 	Global.SetWriter(hook)
+	Global.SetConsole(logConfig.Console)
 	return Global.Logger(name)
 }
 

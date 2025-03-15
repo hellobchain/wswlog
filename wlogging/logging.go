@@ -54,6 +54,7 @@ type Logging struct {
 	encoderConfig  zapcore.EncoderConfig
 	multiFormatter *wenc.MultiFormatter
 	writer         zapcore.WriteSyncer
+	console        bool
 	observer       Observer
 }
 
@@ -167,6 +168,14 @@ func (s *Logging) SetWriter(w io.Writer) io.Writer {
 	return ow
 }
 
+func (s *Logging) SetConsole(console bool) bool {
+	s.mutex.Lock()
+	ow := s.console
+	s.console = console
+	s.mutex.Unlock()
+	return ow
+}
+
 // SetObserver is used to provide a log observer that will be called as log
 // levels are checked or written.. Only a single observer is supported.
 func (s *Logging) SetObserver(observer Observer) Observer {
@@ -177,6 +186,12 @@ func (s *Logging) SetObserver(observer Observer) Observer {
 	return so
 }
 
+var DefaultWriter = os.Stdout
+
+func consolePrint(b []byte) (int, error) {
+	return DefaultWriter.Write(b)
+}
+
 // Write satisfies the io.Write contract. It delegates to the writer argument
 // of SetWriter or the Writer field of Config. The Core uses this when encoding
 // log records.
@@ -184,7 +199,9 @@ func (s *Logging) Write(b []byte) (int, error) {
 	s.mutex.RLock()
 	w := s.writer
 	s.mutex.RUnlock()
-
+	if s.console {
+		consolePrint(b)
+	}
 	return w.Write(b)
 }
 
