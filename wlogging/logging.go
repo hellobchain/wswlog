@@ -186,10 +186,10 @@ func (s *Logging) SetObserver(observer Observer) Observer {
 	return so
 }
 
-var DefaultWriter = os.Stdout
+var defaultWriter io.Writer = os.Stderr
 
 func consolePrint(b []byte) (int, error) {
-	return DefaultWriter.Write(b)
+	return defaultWriter.Write(b)
 }
 
 // Write satisfies the io.Write contract. It delegates to the writer argument
